@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/screens/filter_screen.dart';
 import 'package:flutter_complete_guide/screens/meal_detail_screen.dart';
+import 'package:flutter_complete_guide/screens/tabs_screen.dart';
 
 import 'screens/categories_screen.dart';
 import 'screens/category_meal_screen.dart';
@@ -12,7 +14,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'DeliMeals',
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.pink,
         accentColor: Colors.amber,
         canvasColor: Color.fromARGB(255, 255, 255, 255),
         fontFamily: 'Raleway',
@@ -30,10 +32,13 @@ class MyApp extends StatelessWidget {
               ),
             ),
       ),
-      home: CategoriesScreen(),
+      // home: tabscreen(),
+      initialRoute: '/',
       routes: {
+        '/': (ctx) => tabscreen(),
         CategoryMealScreen.routename: (context) => CategoryMealScreen(),
         MealdetailScreen.routename: (context) => MealdetailScreen(),
+        filterscreen.routename: (context) => filterscreen(),
       },
       onUnknownRoute: (settings) {
         return MaterialPageRoute(
