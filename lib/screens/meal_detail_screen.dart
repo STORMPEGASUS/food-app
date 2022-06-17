@@ -80,7 +80,6 @@ class MealdetailScreen extends StatelessWidget {
                       title: Text(
                         selectedmeal.steps[index],
                       ),
-                      
                     ),
                     Divider(),
                   ],
@@ -89,6 +88,12 @@ class MealdetailScreen extends StatelessWidget {
             ),
           ],
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        child: Icon(Icons.delete),
+        onPressed: () {
+          Navigator.of(context).pop();
+        },
       ),
     );
   }
