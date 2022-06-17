@@ -1,16 +1,23 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_complete_guide/models/meal.dart';
+
 import 'package:flutter_complete_guide/widgets/meals_item.dart';
 
-import '../dummy_data.dart';
 
-class CategoryMealScreen extends StatelessWidget {
+
+class CategoryMealScreen extends StatefulWidget {
   static const routename = '/category-meals';
 
+  final List<Meal> availablemeal;
+
+   CategoryMealScreen(this.availablemeal);
+
+  @override
+  State<CategoryMealScreen> createState() => _CategoryMealScreenState();
+}
+
+class _CategoryMealScreenState extends State<CategoryMealScreen> {
   // final String title;
-  // final String id;
-
-  // CategoryMealScreen(this.title,this.id);
-
   @override
   Widget build(BuildContext context) {
     //accepting the values from route page
@@ -19,7 +26,7 @@ class CategoryMealScreen extends StatelessWidget {
 
     final categoryTitle = routearg['title'];
     final categoryId = routearg['id'];
-    final categorymeals = DUMMY_MEALS.where((meal) {
+    final categorymeals = widget.availablemeal.where((meal) {
       return meal.categories.contains(categoryId);
     }).toList();
 

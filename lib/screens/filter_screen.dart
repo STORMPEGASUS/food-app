@@ -4,6 +4,11 @@ import 'package:flutter_complete_guide/widgets/main_drawer.dart';
 class filterscreen extends StatefulWidget {
   static const routename = '/filter';
 
+  final Function savefilters;
+  final Map<String, bool> currentfilters;
+
+  filterscreen( this.currentfilters,this.savefilters);
+
   @override
   State<filterscreen> createState() => _filterscreenState();
 }
@@ -13,6 +18,15 @@ class _filterscreenState extends State<filterscreen> {
   var _vegeterian = false;
   var _vegan = false;
   var _lactoseFree = false;
+
+  @override
+  void initState() {
+    _glutenFree = widget.currentfilters['gluten'];
+    _lactoseFree = widget.currentfilters['lactose'];
+    _vegan = widget.currentfilters['vegan'];
+    _vegeterian = widget.currentfilters['vegeterian'];
+    super.initState();
+  }
 
   Widget _buildswitchlisttile(
     String title,
@@ -35,6 +49,21 @@ class _filterscreenState extends State<filterscreen> {
         title: Text(
           'Your Filters',
         ),
+        actions: <Widget>[
+          IconButton(
+            onPressed: () {
+              final selectedfilters = {
+                'gluten': _glutenFree,
+                'lactose': _lactoseFree,
+                'vegan': _vegan,
+                'vegeterian': _vegeterian,
+              };
+
+              widget.savefilters(selectedfilters);
+            },
+            icon: Icon(Icons.save),
+          ),
+        ],
       ),
       drawer: Maindrawer(),
       body: Column(
@@ -79,8 +108,7 @@ class _filterscreenState extends State<filterscreen> {
                   (newvalue) {
                     setState(
                       () {
-                        
-                      _vegeterian = newvalue;
+                        _vegeterian = newvalue;
                       },
                     );
                   },
