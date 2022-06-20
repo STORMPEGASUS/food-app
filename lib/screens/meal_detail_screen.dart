@@ -6,7 +6,11 @@ import 'package:flutter_complete_guide/dummy_data.dart';
 class MealdetailScreen extends StatelessWidget {
   static const routename = '/meal-detail';
 
-  //creating function becaouse of repeated use of widget
+  final Function toggle;
+  final Function isfav;
+  MealdetailScreen(this.toggle, this.isfav);
+
+  //creating function because of repeated use of widget
   Widget buildsectiontitle(BuildContext context, String title) {
     return Container(
       margin: EdgeInsets.symmetric(vertical: 10),
@@ -90,10 +94,10 @@ class MealdetailScreen extends StatelessWidget {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(Icons.delete),
-        onPressed: () {
-          Navigator.of(context).pop();
-        },
+        child: Icon(
+          isfav(mealid) ? Icons.star : Icons.star_border,
+        ),
+        onPressed:()=>toggle(mealid),
       ),
     );
   }
